@@ -1,13 +1,14 @@
 import React from "react";
 import Baseapp from "../Base/Basecomponent";
+import { Appstate } from "../Context/AppProvider";
 
 
 
-function Students({student,setStudent,history}) {
-    
-    
+function Students() {
 
-    function deleteUser(id) {
+    const { student, setStudent, history } = Appstate();
+
+  function deleteUser(id) {
         const newStudents = student.filter((stud) => stud.id !== id);
         setStudent(newStudents)
     }
@@ -26,7 +27,9 @@ function Students({student,setStudent,history}) {
                             <p>{stud.state}</p>
                         </div>
                         <div className="card-footer">
-                            <button className="btn btn-outline-primary m-1" onClick={()=> history.push(`/edit/${stud.id}`)}>Modify</button>
+                            <button className="btn btn-outline-primary m-1" onClick={() => history.push(`/edit/${stud.id}`)}>Modify</button>
+
+                            
                             <button className="btn btn-outline-danger m-1" onClick={() => deleteUser(stud.id)}>Delete</button>
                         </div>
                     </div>

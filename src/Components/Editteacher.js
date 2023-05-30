@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Baseapp from "../Base/Basecomponent";
 import { useParams } from 'react-router-dom';
+import { Appstate } from "../Context/AppProvider";
 
 
-function Editteacher({ teachers, setTeachers, history }) {
+function Editteacher() {
+    const { teachers, setTeachers, history } = Appstate();
+
     const [idx, setIdx] = useState("");
     const [name, setName] = useState("");
     const [subject, setSubject] = useState("");
@@ -19,18 +22,29 @@ function Editteacher({ teachers, setTeachers, history }) {
     ), [])
 
 
-    function modifydata() {
+    async function modifydata() {
 
-        const teacherindex = teachers.findIndex((teach)=>teach.id === id);
+        const teacherindex = teachers.findIndex((teach) => teach.id === id);
         const newdata = {
-            id:idx,
+            id: idx,
             name,
-            Subject:subject,
-            Experience:exp
+            Subject: subject,
+            Experience: exp
         }
-        teachers[teacherindex] = newdata;
-        setTeachers([...teachers])
-        history.push('/teachers')
+        try {
+            const response = await fetch(`https://646a0b87183682d6144c45ff.mockapi.io/teacher/${idx}`, {
+                method: "PUT",
+                body: JSON.stringify(newdata),
+                headers: { "Content-Type": "application/json" }
+            })
+            const data = await response.json();
+            console.log(data)
+            teachers[teacherindex] = newdata;
+            setTeachers([...teachers])
+            history.push('/teachers')
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -42,7 +56,6 @@ function Editteacher({ teachers, setTeachers, history }) {
                 <input className="form-control m-2" value={exp} onChange={(e) => setExp(e.target.value)} />
                 <button className="btn btn-primary px-5 m-2" onClick={() => modifydata()}> Modify Details</button>
             </div>
-
         </Baseapp>
     )
 }

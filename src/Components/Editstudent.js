@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Baseapp from "../Base/Basecomponent";
-import {useParams} from "react-router-dom"
+import {useParams} from "react-router-dom";
+import { Appstate } from "../Context/AppProvider";
 
-function Editstudent({student,setStudent,history}) {
+function Editstudent() {
+    const {student,setStudent,history} = Appstate();
+
 
     const [idx, setIdx] = useState("");
     const [name, setName] = useState("");
@@ -10,6 +13,8 @@ function Editstudent({student,setStudent,history}) {
     const [address, setAddress] = useState("");
 
     const {id} = useParams();
+
+
     const selectedStudent = student.find((stud)=>stud.id === id);
 
     useEffect(()=>(

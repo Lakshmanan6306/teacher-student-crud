@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Baseapp from "../Base/Basecomponent";
+import { Appstate } from "../Context/AppProvider";
 
-function Newstudent({student,setStudent,history}) {
+function Newstudent() {
+    const {student,setStudent,history} = Appstate();
+
     const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [clas, setClas] = useState("");

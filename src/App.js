@@ -13,10 +13,7 @@ import Newteacher from './Components/Newteacher';
 import Editteacher from './Components/Editteacher';
 
 function App() {
-  const [student, setStudent] = useState(studentData);
-  const [teachers, setTeachers] = useState(teacherData);
-  const history = useHistory();
-
+ 
   return (
     <div className="App">
       <Switch>
@@ -25,51 +22,27 @@ function App() {
         </Route>
 
         <Route path="/students">
-          <Students
-            student={student}
-            setStudent={setStudent}
-            history={history}
-          />
+          <Students/>
         </Route>
 
         <Route path="/teachers">
-          <Teachers
-            teachers={teachers}
-            setTeachers={setTeachers}
-            history={history}
-          />
+          <Teachers/>
         </Route>
 
         <Route path="/newstudent">
-          <Newstudent
-            student={student}
-            setStudent={setStudent}
-            history={history}
-          />
+          <Newstudent/>
         </Route>
 
         <Route path="/edit/:id">
-          <Editstudent
-            student={student}
-            setStudent={setStudent}
-            history={history}
-          />
+          <Editstudent/>
         </Route>
 
         <Route path='/newteacher'>
-          <Newteacher
-            teachers={teachers}
-            setTeachers={setTeachers}
-            history={history}
-          />
+          <Newteacher/>
         </Route>
 
         <Route path='/editteacher/:id'>
-          <Editteacher
-            teachers={teachers}
-            setTeachers={setTeachers}
-            history={history}
-          />
+          <Editteacher/>
         </Route>
 
 
